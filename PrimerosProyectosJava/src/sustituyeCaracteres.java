@@ -1,22 +1,29 @@
+import java.util.Scanner;
+
 
 public class sustituyeCaracteres {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String palabra="supercalifragilisticoespialidoso";
-		String nuevaPalabra = sustituye(palabra);
-		System.out.println(palabra);
-		System.out.println(nuevaPalabra);
+		String cadena;
+		String primeraLetra;
+		String ultimaLetra;
+		String resultado="X";
+		Scanner sc;
+		System.out.print("Dime tu nombre: ");
+		sc= new Scanner(System.in);
+		cadena=sc.nextLine();
+		//System.out.println(cadena);
+		//System.out.print("Te llamas "+cadena+" y tu nombre empieza por la letra ");
+		//System.out.println(cadena.charAt(0)+" y acaba en "+cadena.charAt(cadena.length()-1));
+		sc.close();
+		primeraLetra=cadena.substring(0,1);
+		ultimaLetra=cadena.substring(cadena.length()-1);
+		for(int cont=1;cont<cadena.length()-1;cont++){
+			resultado=resultado+"X";
+		}
+		resultado=primeraLetra+resultado+ultimaLetra;
+		System.out.println("Resultado: "+resultado);
 	}
 
-	private static String sustituye(String pal){
-		String aux="";
-		aux= pal.charAt(0)+"";
-		for(int i=1; i<pal.length()-1;i++){
-			aux += "x";//aux = aux  + "x";
-		}
-		aux += pal.charAt(pal.length()-1);
-		
-		return aux;
-	}
 }
