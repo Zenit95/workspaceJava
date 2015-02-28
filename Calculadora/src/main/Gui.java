@@ -26,7 +26,7 @@ import javax.swing.SwingConstants;
 public class Gui extends JFrame {
 	private JTextField display;
 	private String operation = "";
-	private int lastValue = 0;
+	private float lastValue = 0;
 
 	/**
 	 * @return the display
@@ -52,7 +52,7 @@ public class Gui extends JFrame {
 	/**
 	 * @return the lastValue
 	 */
-	public int getLastValue() {
+	public float getLastValue() {
 		return lastValue;
 	}
 
@@ -108,11 +108,11 @@ public class Gui extends JFrame {
 		getContentPane().add(panel_1, gbc_panel_1);
 
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[] {30, 50, 50, 50, 89, 0};
+		gbl_panel_1.columnWidths = new int[] {30, 50, 50, 50, 30, 30, 0};
 		gbl_panel_1.rowHeights = new int[] { 23, 0, 0, 0 };
-		gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+		gbl_panel_1.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				Double.MIN_VALUE };
-		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0 };
+		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0};
 		panel_1.setLayout(gbl_panel_1);
 
 		JButton button_7 = new JButton("7");
@@ -140,10 +140,11 @@ public class Gui extends JFrame {
 		panel_1.add(button_9, gbc_button_9);
 
 		JButton button_cls = new JButton("CLS");
+		button_cls.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_button_cls = new GridBagConstraints();
 		gbc_button_cls.anchor = GridBagConstraints.EAST;
 		gbc_button_cls.insets = new Insets(0, 0, 5, 5);
-		gbc_button_cls.gridx = 4;
+		gbc_button_cls.gridx = 5;
 		gbc_button_cls.gridy = 0;
 		panel_1.add(button_cls, gbc_button_cls);
 
@@ -170,14 +171,22 @@ public class Gui extends JFrame {
 		gbc_button_6.gridx = 3;
 		gbc_button_6.gridy = 1;
 		panel_1.add(button_6, gbc_button_6);
-
-		JButton button_add = new JButton("+");
-		GridBagConstraints gbc_button_add = new GridBagConstraints();
-		gbc_button_add.anchor = GridBagConstraints.EAST;
-		gbc_button_add.insets = new Insets(0, 0, 5, 5);
-		gbc_button_add.gridx = 4;
-		gbc_button_add.gridy = 1;
-		panel_1.add(button_add, gbc_button_add);
+		
+		JButton button_mult = new JButton("*");
+		GridBagConstraints gbc_button_mult = new GridBagConstraints();
+		gbc_button_mult.anchor = GridBagConstraints.EAST;
+		gbc_button_mult.insets = new Insets(0, 0, 5, 5);
+		gbc_button_mult.gridx = 4;
+		gbc_button_mult.gridy = 1;
+		panel_1.add(button_mult, gbc_button_mult);
+		
+		JButton button_div = new JButton("/");
+		GridBagConstraints gbc_button_div = new GridBagConstraints();
+		gbc_button_div.anchor = GridBagConstraints.EAST;
+		gbc_button_div.insets = new Insets(0, 0, 5, 5);
+		gbc_button_div.gridx = 5;
+		gbc_button_div.gridy = 1;
+		panel_1.add(button_div, gbc_button_div);
 
 		JButton button_1 = new JButton("1");
 		GridBagConstraints gbc_button_1 = new GridBagConstraints();
@@ -203,11 +212,19 @@ public class Gui extends JFrame {
 		gbc_button_3.gridy = 2;
 		panel_1.add(button_3, gbc_button_3);
 
+		JButton button_add = new JButton("+");
+		GridBagConstraints gbc_button_add = new GridBagConstraints();
+		gbc_button_add.anchor = GridBagConstraints.EAST;
+		gbc_button_add.insets = new Insets(0, 0, 5, 5);
+		gbc_button_add.gridx = 4;
+		gbc_button_add.gridy = 2;
+		panel_1.add(button_add, gbc_button_add);
+
 		JButton button_subs = new JButton("-");
 		GridBagConstraints gbc_button_subs = new GridBagConstraints();
 		gbc_button_subs.anchor = GridBagConstraints.EAST;
 		gbc_button_subs.insets = new Insets(0, 0, 5, 5);
-		gbc_button_subs.gridx = 4;
+		gbc_button_subs.gridx = 5;
 		gbc_button_subs.gridy = 2;
 		panel_1.add(button_subs, gbc_button_subs);
 
@@ -223,7 +240,7 @@ public class Gui extends JFrame {
 		GridBagConstraints gbc_button_equal = new GridBagConstraints();
 		gbc_button_equal.anchor = GridBagConstraints.EAST;
 		gbc_button_equal.insets = new Insets(0, 0, 5, 5);
-		gbc_button_equal.gridx = 4;
+		gbc_button_equal.gridx = 5;
 		gbc_button_equal.gridy = 3;
 		panel_1.add(button_equal, gbc_button_equal);
 		
@@ -248,6 +265,36 @@ public class Gui extends JFrame {
 			}
 		});
 		
+		button_subs.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setLastValue(Integer.parseInt(getDisplay().getText()));
+				setOperation("-");
+			}
+		});
+		
+		button_mult.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setLastValue(Integer.parseInt(getDisplay().getText()));
+				setOperation("*");
+			}
+		});
+		
+		button_div.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				setLastValue(Integer.parseInt(getDisplay().getText()));
+				setOperation("/");
+			}
+		});
+		
 		button_equal.addActionListener(new ActionListener() {
 			
 			@Override
@@ -255,6 +302,15 @@ public class Gui extends JFrame {
 				// TODO Auto-generated method stub
 				if(getOperation().equals("+")){
 					getDisplay().setText(getLastValue()+Integer.parseInt(getDisplay().getText())+"");
+				}
+				if(getOperation().equals("-")){
+					getDisplay().setText(getLastValue()-Integer.parseInt(getDisplay().getText())+"");
+				}
+				if(getOperation().equals("*")){
+					getDisplay().setText(getLastValue()*Integer.parseInt(getDisplay().getText())+"");
+				}
+				if(getOperation().equals("/")){
+					getDisplay().setText(getLastValue()/Integer.parseInt(getDisplay().getText())+"");
 				}
 			}
 		});
@@ -283,6 +339,69 @@ public class Gui extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				getDisplay().setText("2");
+			}
+		});
+		
+		button_3.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				getDisplay().setText("3");
+			}
+		});
+		
+		button_4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				getDisplay().setText("4");
+			}
+		});
+		
+		button_5.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				getDisplay().setText("5");
+			}
+		});
+		
+		button_6.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				getDisplay().setText("6");
+			}
+		});
+		
+		button_7.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				getDisplay().setText("7");
+			}
+		});
+		
+		button_8.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				getDisplay().setText("8");
+			}
+		});
+		
+		button_9.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				getDisplay().setText("9");
 			}
 		});
 	}
